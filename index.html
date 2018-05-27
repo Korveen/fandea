@@ -5,9 +5,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/fontawesome-all.min.css">
     <link rel="stylesheet" href="css/cssreset.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.3.1.min.js"></script>
     <title>FUNDEA</title>
+    
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        
+        emailjs.init("user_HUepLb735OvnVC2YMSllr");
+        
+        $(document).ready(function(){
+            document.getElementById('order-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var from_name = document.getElementsByName('reply-email')[0].value;
+                let validEmail = false;
+                validEmail = validate(from_name);
+                if(validEmail){
+                    var message_html = '<p>Новый пользователь оставил свой электронный адрес <strong>'+from_name+'</strong> на сайте FUNDEA</p>';
+                
+                    emailjs.send("mailgun","template_c0uIZLKn",{name: "JYpostService", notes: "Check this out!", message_html: message_html})
+                        .then(function(response) {
+                        console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
+                    }, function(err) {
+                        console.log("FAILED. error=", err);
+                    });
+                    return false;
+                    
+                } else {
+                    return false;
+                }
+            });
+        });
+            
+        function validate(email) {
+            var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            //var address = document.forms[form_id].elements[email].value;
+            if(reg.test(email) == false) {
+                alert('Введите корректный e-mail');
+                return false;
+            }
+        }
+        
+        
+    </script>
 </head>
 
 <body>
@@ -15,48 +57,87 @@
         <header>
             <div class="upper-logo">
                 <a href="index.html">
-                    <img class="logo-img" src="img/logo.png" title="jY" alt="jY" height="60px">
+                    <img class="logo-img" src="img/logo-invert.png" title="jY" alt="jY">
                 </a>
             </div>
 
-            <nav class="mobile-menu">
-                <input type="checkbox" id="checkbox" class="mobile-menu-checkbox">
-                <label for="checkbox" class="mobile-menu-btn">
-                    <div class="mobile-menu-icon"></div>
-                </label>
-                <div class="mobile-menu-container">
-                    <ul class="mobile-menu-list">
-                        <li class="mobile-menu-item">
-                            <a href="#" class="mobile-menu-link">About</a>
-                        </li>
-                        <li class="mobile-menu-item">
-                            <a href="catalog.html" class="mobile-menu-link">Cryptocollection</a>
-                        </li>
-                        <li class="mobile-menu-item">
-                            <a href="#" class="mobile-menu-link">Team</a>
-                        </li>
-                        <li class="mobile-menu__item">
-                            <a href="#" class="mobile-menu-link">Blog</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
         </header>
         <div class="logo-wrapper">
             <div class="logo-center">
-                <h1 class="logotext">fundea</h1>
-                <h2 class="logotext2">jewelry & accessories</h2>
+                <img src="img/logo2-invert.png" alt="FUNDEA">
             </div>
             <div class="bg-logo">
-                <img src="img/logo.png" alt="logo">
+                <img src="img/logo-invert.png" alt="logo">
             </div>
+        </div>
+        <div class="slider">
+            <input type="radio" name="slider1" id="slider1-1" checked="checked">
+            <label for="slider1-1"></label>
+            <div>
+                <figure class="slider-img-container">
+                    <img src="img/catalog/efiriun/efiriun-man.png" alt="">
+                </figure>
+            </div>
+            <label for="slider1-2"></label>
+
+            <input type="radio" name="slider1" id="slider1-2">
+            <label for="slider1-2"></label>
+            <div>
+                <figure class="slider-img-container">
+                    <img src="img/catalog/l-bracelet/l-bracelet-black.png" alt="">
+                </figure>
+            </div>
+            <label for="slider1-3"></label>
+
+            <input type="radio" name="slider1" id="slider1-3">
+            <label for="slider1-3"></label>
+            <div>
+                <figure class="slider-img-container">
+                    <img src="img/catalog/leather/leather-gold.png" alt="">
+                </figure>
+            </div>
+            <label for="slider1-4"></label>
+
+            <input type="radio" name="slider1" id="slider1-4">
+            <label for="slider1-4"></label>
+            <div>
+                <figure class="slider-img-container">
+                    <img src="img/catalog/indes/indes-silver.png" alt="">
+                </figure>
+            </div>
+            <label for="slider1-5"></label>
+
+            <input type="radio" name="slider1" id="slider1-5">
+            <label for="slider1-5"></label>
+            <div>
+                <figure class="slider-img-container">
+                    <img src="img/catalog/indes/indes-gold.png" alt="">
+                </figure>
+            </div>
+            <label for="slider1-6"></label>
+
+            <input type="radio" name="slider1" id="slider1-6">
+            <label for="slider1-6"></label>
+            <div>
+                <figure class="slider-img-container">
+                    <img src="img/catalog/indes/indes-black.png" alt="">
+                </figure>
+            </div>
+            <label for="slider1-1"></label>
 
         </div>
     </div>
-    <div class="background">
-        <img class="background-img" src="img/bg1.jpg" alt="background">
+    <div class="order-countainer">
+        <p class="order-header">Would you like to own it?</p>
+        <form id="order-form" role='form' action="" method="POST">
+            <div class="form-group ">
+                <input class="form-control" placeholder="E-mail" type="text" name="reply-email" required/>
+                <hr>
+                <button type="submit" class="form-button btn-order">Submit</button>
+            </div>
+        </form>
     </div>
-
+    </div>
 </body>
 
 </html>

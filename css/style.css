@@ -1,63 +1,88 @@
 @font-face {
-    font-family: "FuturaBookBTRegular";
-    src: url("../fonts/FuturaBookBTRegular.otf");
+    font-family: "FuturaBookBT";
+    src: url("../fonts/FuturaBookBT.otf");
     font-style: normal;
     font-weight: normal;
 }
 
 * {
-    font-family: "FuturaBookBTRegular";
-    letter-spacing: 3px;
+    font-family: "FuturaBookBT";
+    letter-spacing: 2px;
 }
 
 input[type="radio"] {
     -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    appearance: checkbox;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
 hr {
-    border-style: solid;
     color: #555555;
 }
 
+::-webkit-input-placeholder {
+    text-align: center;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    text-align: center;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    text-align: center;
+}
+
+:-ms-input-placeholder {
+    text-align: center;
+}
+
 header {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
 }
 
 body {
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
+    background-color: #f2f2f2;
 }
 
 .wrapper {
-    margin: 25px
-}
-
-.catalog-wrap {
-    margin: 40px 50px;
+    padding: 25px;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .background {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: -1;
-    background-color: #ffffff;
+    background-color: #f2f2f2;
     overflow: hidden;
 }
 
-.background-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    object-fit: cover;
+.upper-logo {
+    z-index: 999;
+}
+
+.logo-img {
+    height: 40px;
+    margin-bottom: 20px;
 }
 
 .logo-wrapper {
@@ -67,22 +92,16 @@ body {
 
 .logo-center {
     margin: 0 auto;
-    max-width: 499px;
-    text-align: justify;
-    font-family: "FuturaBookBTRegular";
-    text-transform: uppercase;
-    color: #ffffff;
+    text-align: center;
 }
 
-.logotext {
-    font-size: 72px;
-    letter-spacing: 40px;
+.logo-center img {
+    max-width: 500px;
 }
 
-.logotext2 {
-    padding-top: 30px;
-    font-size: 16px;
-    letter-spacing: 15px;
+.middle-logo {
+    z-index: 10;
+    margin-left: 50px;
 }
 
 .middle-logo img {
@@ -92,237 +111,135 @@ body {
 .bg-logo {
     opacity: 0.15;
     position: fixed;
-    top: 30vh;
+    top: 25vh;
     left: 0;
     right: 0;
     text-align: center;
 }
 
 .bg-logo>img {
-    height: 40vh;
+    height: 45vh;
 }
 
-/* MOBILE MENU */
+/* CAROUSEL */
 
-.mobile-menu {
+.slider {
+    width: 100%;
+    height: 37vh;
+    position: relative;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50px;
-    z-index: 9999999;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 50px 0 150px;
 }
 
-.mobile-menu-checkbox {
+.slider>input {
     display: none;
 }
 
-.mobile-menu-btn {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.slider>input+label {
+    display: none;
     width: 30px;
-    height: 30px;
+    height: 7px;
+    background: rgba(0, 0, 0, 0.5);
     cursor: pointer;
-    transition: .4s;
-}
-
-.mobile-menu-icon {
-    display: block;
+    z-index: 5;
     position: relative;
-    background: #ffffff;
-    width: 90%;
-    height: 4px;
-    transition: .4s;
-    z-index: 1000;
+    top: 300px;
+    margin-right: 5px;
+    transition: background 0.8s ease-in-out 0s;
 }
 
-.mobile-menu-icon::before {
-    content: "";
-    display: block;
+.slider>input+label:hover {
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.slider>input:checked+label {
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.slider>div {
     position: absolute;
-    background: #ffffff;
-    width: 100%;
-    height: 4px;
-    transition: .4s;
-}
-
-.mobile-menu-icon::before {
-    top: -8px;
-}
-
-.mobile-menu-icon::after {
-    content: "";
-    display: block;
-    position: absolute;
-    background: #ffffff;
-    width: 100%;
-    height: 4px;
-    transition: .4s;
-}
-
-.mobile-menu-icon::after {
-    top: 8px;
-}
-
-.mobile-menu-checkbox:checked~.mobile-menu-btn .mobile-menu-icon {
-    background: transparent;
-}
-
-.mobile-menu-checkbox:checked~.mobile-menu-btn .mobile-menu-icon::before,
-.mobile-menu-checkbox:checked~.mobile-menu-btn .mobile-menu-icon::after {
-    top: 0;
-}
-
-.mobile-menu-checkbox:checked~.mobile-menu-btn .mobile-menu-icon::before {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-}
-
-.mobile-menu-checkbox:checked~.mobile-menu-btn .mobile-menu-icon::after {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-}
-
-.mobile-menu-container {
-    position: fixed;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 0;
     left: 0;
     right: 0;
-    z-index: 999;
-    height: 100%;
-    opacity: 0;
-    transition: .5s;
-    transition-delay: .1s;
-    overflow: hidden;
-    background-color: rgba(32, 19, 27, 0.75);
+    z-index: 0;
+}
+
+.slider>div {
     visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out 0.1s, visibility 0.1s ease-in-out 0.9s;
 }
 
-.mobile-menu-checkbox:checked~.mobile-menu-container {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0s;
+.slider-img-container {
+    padding: 5% 30%;
 }
 
-.mobile-menu-list {
-    list-style: none;
-    padding-left: 0;
-    margin-top: -50px;
-}
-
-.mobile-menu-item {
-    font-size: 26px;
-    padding-bottom: 15px;
-}
-
-.mobile-menu-link {
-    font-family: "FuturaBookBTRegular";
-    font-size: 22px;
-    letter-spacing: 6px;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: #7c7c7c;
-    margin: 20px 0;
-    transition: .1s;
-}
-
-.mobile-menu-link:hover {
-    color: #ffffff;
-}
-
-.background-img-left {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 50%;
-    background-color: rgba(17, 34, 51, 0.164);
-    width: 50%;
-    height: 100%;
-    z-index: 2;
+.slider-img-container>img {
     object-fit: cover;
-    overflow: hidden;
+    width: 100%;
+    height: auto;
 }
 
-.bg-cover {
-    opacity: 0.65;
+.slider>input:checked+label+div {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.8s ease-in-out 0.1s, visibility 0.1s ease-in-out 0s;
 }
 
-.flex-content-hor {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.slider>input+label+div+label {
+    display: none;
 }
 
-.main-content-right {
+.slider>input:checked+label+div+label {
+    display: block;
     position: absolute;
     top: 0;
-    bottom: 0;
-    left: 50%;
+    left: 0;
     right: 0;
-    padding: 180px 50px 200px;
+    bottom: 0;
+    z-index: 50;
 }
 
-.catalog-item-arrow {
-    width: 30px;
-    margin: auto 0;
-    text-align: center;
+/* !CAROUSEL */
+
+.btn-order {
+    background-color: transparent;
+    border: 2px solid #222222;
+    border-radius: 50px;
+    display: inline-block;
+    outline: none !important;
+    cursor: pointer;
+    color: #fff;
+    background-color: #222222;
+    font-size: 16px;
+    text-transform: capitalize;
+    padding: 10px 30px 10px;
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
 }
 
-.catalog-item-arrow:first-child {
-    margin-right: 50px;
+.btn-order:hover {
+    background-color: #333333;
+    border-color: #333333;
 }
 
-.catalog-item-arrow:last-child {
-    margin-left: 50px;
+.form-button {
+    margin-top: 30px;
 }
 
-.catalog-item-wrap {
-    width: 100%;
+.arrow-down-anim {
+    position: relative;
+    -webkit-animation: bounce 3s infinite;
+    animation: bounce 3s infinite both;
 }
 
-.catalog-item>h1 {
-    text-transform: uppercase;
-    font-size: 32px;
-}
-
-.item-description {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-}
-
-.item-description>h2 {
-    font-size: 18px;
-}
-
-.item-description .item-size {
-    text-transform: uppercase;
-    font-size: 18px;
-}
-
-.item-description .item-price {
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    font-size: 32px;
-}
-
-.size-select {
-    font-size: 18px;
-    background-color: rgba(255, 255, 255, 0);
-    border: none;
-}
-
-.size-select option {
-    background: rgba(255, 255, 255, 0.6);
+.order-countainer {
+    padding-bottom: 50px;
 }
 
 #order-form {
@@ -330,48 +247,27 @@ body {
     padding: 0 25px;
 }
 
-.order-wrapper {
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
-.order-container {
-    position: absolute;
-    z-index: 11;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 260px;
-    margin: auto;
-    width: 580px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 2px solid #000000;
-    outline: 10px solid rgba(255, 255, 255, 0.8);
-}
-
 .order-header {
     text-align: center;
     text-transform: uppercase;
-    font-size: 22px;
+    font-size: 1.5em;
     margin-top: 15px;
 }
 
 .form-group {
-    margin: 15px 0;
+    margin: 15px auto;
+    width: 600px;
+    text-align: center;
 }
 
 .form-group hr {
     margin: 0.3em 0;
 }
-.form-group > .control-label:first-child
-{
+
+.form-group>.control-label:first-child {
     margin-right: 20px;
 }
+
 .control-label.mini-control {
     font-size: 10px;
 }
@@ -379,13 +275,218 @@ body {
 .control-label {
     font-size: 14px;
     color: #333333;
-
 }
 
 .form-control {
     background-color: #ffffff00;
+    width: 100%;
     border: 0px;
     outline: none;
-    font-size: 18px;
+    font-size: 14px;
     text-transform: capitalize;
+    text-align: center;
+}
+
+.lg-margin {
+    margin-top: 35vh !important;
+}
+
+@-webkit-keyframes bounce {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    75% {
+        -webkit-transform: translate3d(0, -20px, 0);
+        transform: translate3d(0, -20px, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes bounce {
+    0% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    75% {
+        -webkit-transform: translate3d(0, -20px, 0);
+        transform: translate3d(0, -20px, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@media screen and (max-width:1024px) {
+    .slider-img-container {
+        padding: 10%;
+    }
+    .form-group {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width:1024px) and (min-width: 768px) {
+    .order-header {
+        font-size: 26px;
+    }
+    .form-group {
+        margin-top: 40px;
+    }
+    .form-control {
+        font-size: 22px;
+    }
+    .btn-order {
+        font-size: 26px;
+    }
+    .slider {
+        padding: 150px 0 280px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .middle-logo img {
+        max-width: 230px;
+    }
+    .logo-center img {
+        max-width: 85%;
+    }
+    .left-side {
+        right: 0;
+        bottom: 60%;
+    }
+    .right-side {
+        left: 0;
+        top: 40%;
+        padding: 20px 25px;
+    }
+    .item-view-more {
+        margin-top: 20px;
+    }
+    .item-view-more p {
+        margin-top: 5px;
+    }
+    .slider {
+        padding: 0px 0 150px;
+    }
+}
+
+@media screen and (max-width:580px) {
+    .logo-wrapper {
+        margin-top: 25vh;
+    }
+    .bg-logo>img {
+        height: 35vh;
+    }
+    .carusel-wrapper {
+        margin-top: 50px;
+    }
+    .slider>div {
+        /* margin-top: 30px; */
+    }
+    .order-header {
+        font-size: 15px;
+    }
+    .slider {
+        padding: 200px 0 50px;
+    }
+}
+
+@media screen and (max-width:425px) {
+    .middle-logo {
+        display: none;
+    }
+    .wrapper {
+        padding: 15px;
+    }
+    .right-side {
+        padding: 15px;
+    }
+    .btn-order {
+        padding: 5px 20px 5px;
+        font-size: 14px;
+    }
+    .carousel-announce {
+        font-size: 1.5em;
+    }
+    .slider {
+        padding: 150px 0 0;
+    }
+}
+
+/* 6/7/8 iphone */
+
+@media screen and (max-width:425px) and (max-height:799px) {
+    .carusel-wrapper {
+        margin-top: 100px;
+    }
+    .carousel-announce {
+        padding-top: 75px;
+    }
+    .slider-img-container {
+        padding-top: 20%;
+    }
+    .lg-margin {
+        margin-top: 25vh !important;
+    }
+    .slider {
+        padding: 70px 0 50px;
+    }
+}
+
+/* iphone 6+/7+/8+/x*/
+
+@media screen and (max-width:530px) and (min-height:730px) {
+    .order-countainer {
+        padding-bottom: 100px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .order-countainer {
+        padding-bottom: 50px;
+    }
+}
+
+/* iphone 4 */
+
+@media screen and (max-width: 320px) and (max-height: 480px) {
+    .slider {
+        padding: 0 0 50px;
+    }
+    .order-countainer {
+        padding-bottom: 25px;
+    }
+}
+
+@media all and (orientation: landscape) and (max-width: 768px) and (max-height: 425px) {
+    body {
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+    .wrapper {
+        position: absolute;
+    }
+    .left-side {
+        right: 0;
+        bottom: Calc(100% - 95px);
+    }
+    .right-side {
+        position: relative;
+        top: 0;
+        padding: 35px 0;
+    }
+}
+
+@media all and (orientation: landscape) and (max-height:680px) {
+    .logo-wrapper {
+        margin-top: 20vh;
+    }
+    .bg-logo {
+        top: 20vh;
+    }
 }
