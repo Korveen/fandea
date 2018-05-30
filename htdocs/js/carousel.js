@@ -1,14 +1,7 @@
 var timing = 2000;
 var focused = false;
 
-$(document).on('click', function (e) {
-    if ($('.form-control').is(':focus')) {
-        $('.form-control').focus();
-        $('.slider').slick('slickPause');
-    } else {
-        $('.slider').slick('slickPlay')
-    }
-});
+
 
 $(function () {
 
@@ -33,6 +26,17 @@ $(function () {
             return $(':not(.empty-div)', this).length !== 1;
         });
     }
+
+    $('.form-control').on('click', function (e) {
+        if (this == $('.form-control')) {
+            if ($('.form-control').is(':focus')) {
+                $('.form-control').focus();
+                $('.slider').slick('slickPause');
+            } else {
+                $('.slider').slick('slickPlay')
+            }
+        }
+    });
 });
 
 $(window).resize(function () {
