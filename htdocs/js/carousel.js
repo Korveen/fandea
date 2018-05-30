@@ -3,7 +3,7 @@ var focused = false;
 
 $(document).on('keyup', function (e) {
     if ($('.form-control').is(':focus')) {
-        $('.slider').slick('autoplay', false);
+        $('.slider').slick('slickPause');
     }
 });
 
