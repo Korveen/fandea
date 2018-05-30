@@ -1,9 +1,11 @@
 var timing = 2000;
 var focused = false;
 
-$(document).on('keyup', function (e) {
+$(document).on('click', function (e) {
     if ($('.form-control').is(':focus')) {
         $('.slider').slick('slickPause');
+    } else {
+        $('.slider').slick('slickPlay')
     }
 });
 
