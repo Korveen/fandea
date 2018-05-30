@@ -30,7 +30,7 @@ $(function () {
     $('.form-control').on('click', function (e) {
         if (this == $('.form-control')) {
             if ($('.form-control').is(':focus')) {
-                $('.form-control').focus();
+                $('.form-control').select();
                 $('.slider').slick('slickPause');
             } else {
                 $('.slider').slick('slickPlay')
