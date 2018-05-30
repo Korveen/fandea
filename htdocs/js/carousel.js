@@ -3,7 +3,7 @@ var focused = false;
 
 $(document).on('click', function (e) {
     if ($('.form-control').is(':focus')) {
-        $('.form-control').select();
+        $('.form-control').focus();
         $('.slider').slick('slickPause');
     } else {
         $('.slider').slick('slickPlay')
