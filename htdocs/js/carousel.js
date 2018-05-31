@@ -1,74 +1,55 @@
-var interval;
-var timing = 4000;
-var response = false;
-
+var timing = 3000;
+var timeOut;
 $(function () {
-    
+
+    $('.slider').slick({
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        autoplaySpeed: timing,
+        autoplay: true,
+        arrows: false,
+        responsive: [{
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+            },
+        }]
+    });
 
     if ($(window).width() < 768) {
-        response = true;
+        $('.slider').slick('slickFilter', function () {
+            return $(':not(.empty-div)', this).length !== 1;
+        });
+
     }
 
-    // interval = setInterval(function () {
-    //     if (!response) {
-    //         $("#nonresponse").css('display', 'unset');
-    //         $("#response").css('display', 'none');
+    $('.slider').on('afterChange', function (event, slick, currentSlide) {
+        if (currentSlide == 6) {
+            $('#order').fadeIn(100);
+        } else {
+            $('#order').fadeOut(100);
+        }
 
-    //         $('.slider #nonresponse > div:first')
-    //             .fadeOut(1000)
-    //             .next()
-    //             .fadeIn(this, 1000)
-    //             .end()
-    //             .appendTo('.slider #nonresponse');
-    //     } else {
-    //         $("#nonresponse").css('display', 'none');
-    //         $("#response").css('display', 'unset');
+    });
 
-    //         $('.slider #response > div:first')
-    //             .fadeOut(1000)
-    //             .next()
-    //             .fadeIn(this, 1000)
-    //             .end()
-    //             .appendTo('.slider #response');
-    //     }
-    // }, timing);
+
+
+    $('input[type=text]').focus(function () {
+        $('.slider').slick("slickPause");
+    }).blur(function () {
+        $('.slider').slick("slickPlay");
+    });
 });
-
-function fadeIn(elem, duration, callback)
-{
-    let elemMaxHeight = elem.offsetHeight;
-    let h = 0;
-    let o = 0;
-
-    let fadeStep = elemMaxHeight / (duration / 15),
-        fadeOpacityStep = 1 / (duration / 15);
-
-    elem.style.height = 0 + 'px';
-    elem.style.opacity = 0;
-
-    let fadeInterval = setInterval(() =>
-    {
-        if (h < elemMaxHeight)
-        {
-            elem.style.height = (h += fadeStep) + 'px';
-            elem.style.opacity = (o += fadeOpacityStep);
-        }
-        else
-        {
-            if (callback != undefined)
-                callback();
-            clearInterval(fadeInterval);
-        }
-    }, 15);
-    console.log(this);
-    return elem;
-}
 
 $(window).resize(function () {
-    if ($(window).width() < 768)
-        response = true;
-    else
-        response = false;
+    if ($(window).width() < 768) {
+        $('.slider').slick('slickFilter', function () {
+            return $(':not(.empty-div)', this).length !== 1;
+        });
+    } else {
+        $('.slider').slick('slickUnfilter');
+    }
 
 });
-
